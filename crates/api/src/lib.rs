@@ -29,7 +29,7 @@ mod modules;
 pub mod query_tracker_client;
 mod grpc_feed;
 mod slot_syncronizer;
-mod utils;
+pub mod utils;
 
 pub async fn run(config: &str) -> cloudbreak_core::Result<()> {
     let config = ApiConfig::try_load(config)?;

@@ -1,0 +1,52 @@
+[package]
+name = "cloudbreak-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+arbitrary = "1.5.0"
+libfuzzer-sys = "0.4.13"
+sqlparser = "0.64.0"
+serde_json = "1.0.143"
+cloudbreak-api = { path = "../crates/api" }
+cloudbreak-core = { path = "../crates/core" }
+solana-account = "4.5.0"
+solana-account-decoder = { version = "=4.3.0-beta.2", features = ["agave-unstable-api"] }
+solana-pubkey = "4.3.0"
+solana-rpc-client-api = "=4.3.0-beta.2"
+
+# Not a member of the main workspace: cargo-fuzz builds it with nightly.
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "value_cmp"
+path = "fuzz_targets/value_cmp.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "sql_filters"
+path = "fuzz_targets/sql_filters.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "program_accounts_config"
+path = "fuzz_targets/program_accounts_config.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "data_slice"
+path = "fuzz_targets/data_slice.rs"
+test = false
+doc = false
+bench = false
